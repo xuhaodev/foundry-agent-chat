@@ -4,8 +4,7 @@
 // Outputs RESOURCE_GROUP_ID
 
 param environmentName string
-param location string = resourceGroup().location
-param resourceGroupName string
+param location string = 'East US'
 param AZURE_CLIENT_ID string
 param AZURE_TENANT_ID string
 param AZURE_SUBSCRIPTION_ID string
@@ -46,9 +45,8 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'az-${resourcePrefix}-plan-${resourceToken}'
   location: location
   sku: {
-    name: 'P1v2'
-    tier: 'PremiumV2'
-    capacity: 1
+    name: 'F1'
+    tier: 'Free'
   }
 }
 
@@ -93,15 +91,9 @@ resource appService 'Microsoft.Web/sites@2022-03-01' = {
     httpsOnly: true
   }
   tags: {
-    azd-service-name: 'chainlit-app'
-    azd-env-name: environmentName
+    'azd-service-name': 'chainlit-app'
+    'azd-env-name': environmentName
   }
-}
-
-resource siteExtension 'Microsoft.Web/sites/siteextensions@2022-03-01' = {
-  name: '${appServiceName}/chainlit'
-  location: location
-  properties: {}
 }
 
 resource diagSettings 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
