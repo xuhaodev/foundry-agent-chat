@@ -216,4 +216,4 @@ async def stop():
     print("Chat session ended")
 
 if __name__ == "__main__":
-    cl.run()
+    cl.run(host="0.0.0.0", port=8000)
