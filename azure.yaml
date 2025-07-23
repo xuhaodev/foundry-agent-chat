@@ -1,8 +1,0 @@
-name: chainlit-azure-app
-infra:
-  provider: bicep
-services:
-  chainlit-app:
-    project: ./
-    host: appservice
-    language: python
